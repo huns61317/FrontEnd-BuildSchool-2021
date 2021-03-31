@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hw3_toyoto</title>
+
+    <link rel="stylesheet" href="reset.css">
+
+    <style>
+        /* * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        } */
+
+        .section {
+            width: 960px;
+            margin: auto;
+            padding: 50px 0;
+            border: 2px solid blue;
+
+        }
+
+        /* 主區一: 文字1 */
+        /* ====================================================== */
+        .title-group {
+            width: 320px;
+            
+            position: relative;
+            z-index: 3;
+        }
+
+        /* 偶數 */
+        .section:nth-child(even) .title-group {
+            margin-left: auto;
+        }
+
+        .title-group .title {
+            background-color: #f00;
+            color: #fff;
+            font-size: 50px;
+            padding: 20px;
+        }
+
+        .title-group .title .number {
+            transform: rotate(90deg);
+        }
+
+        .title-group .title-sg {
+            padding: 20px;
+
+            background-color: #000;
+            color: #fff;
+
+            position: absolute;
+
+        }
+
+        /* ====================================================== */
+
+
+        /* 主區二: 圖片 */
+        /* ====================================================== */
+        .pic-group {
+            width: 720px;
+            display: flex;
+            align-items: center;
+            /* (交叉軸)垂直對齊 */
+
+            outline: 1px solid green;
+            margin-left: 16.666666%;
+            /* 把剩餘的 外距 空間分配給左側 => 物件會在右邊 */
+            position: relative;
+        }
+
+        /* 偶數 */
+        .section:nth-child(even) .pic-group {
+            margin-left: 0;
+        }
+
+        .pic-group .pic {
+            width: 98%;
+            margin-right: -6.333333%;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .pic-group .pic img {
+            width: 100%;
+            display: block;
+        }
+
+        .pic-group .btn {
+            width: 8.333333%;
+            /* 在 720px 裡面，假設佔了 60px */
+
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 偶數 */
+        .section:nth-child(even) .pic-group .btn {
+            width: 8.333333%;
+            /* 在 720px 裡面，假設佔了 60px */
+
+            position: relative;
+            margin-left: -680px;
+            z-index: 2;
+        }
+
+        .pic-group .btn img {
+            width: 100%;
+        }
+
+        .pic-group .gray {
+            width: 300px;
+            height: 200px;
+            background-color: #aaa;
+
+            position: absolute;
+            top: -10%;
+            right: -10%;
+        }
+
+        /* ====================================================== */
+
+
+        /* 主區三: 文字2 */
+        /* ====================================================== */
+        .main-txt {
+            width: 640px;
+            background-color: #ddd;
+            margin-top: -2em;
+            margin-left: 40px;
+            padding: 20px;
+            position: relative;
+            z-index: 3;
+        }
+
+        /* 偶數 */
+        .section:nth-child(even) .main-txt {
+            margin-left: auto;
+        }
+
+        .main-txt .sg {
+            display: flex;
+            align-items: center;
+        }
+
+        .sg {
+            padding: 0 0 10px 0;
+        }
+
+        .sg span {
+            color: #f00;
+            font-weight: bold;
+        }
+
+        .main-txt .sg .line {
+            width: 100px;
+            height: 4px;
+            background-color: #f00;
+            flex-grow: 1;
+            margin-left: 1em;
+        }
+
+        .main-txt h3 {
+            background-color: black;
+            color: white;
+        }
+
+        .main-txt p {
+            background-image: url("http://fakeimg.pl/4x4/f00");
+            background-repeat: no-repeat;
+            background-position: 0.4em 0.6em;
+            padding-left: 1em;
+        }
+
+        /* ====================================================== */
+    </style>
+
+</head>
+
+<body>
+
+    <!-- 01 -->
+    <section class="section">
+
+        <!-- 主區一 -->
+        <div class="title-group">
+            <h2 class="title">
+                <span class="number">01</span>
+                <span class="title-txt">操控樂趣</span>
+            </h2>
+
+            <div class="title-sg">
+                <h3>人人滿意的駕駛體驗</h3>
+                <p>透過最佳重量分配，實現平順起步、直線穩定加速，過彎同時保持車身平穩，帶給駕駛更靈敏的道路反饋，享受隨心馳騁的行駛快感。.</p>
+            </div>
+        </div>
+
+        <!-- 主區二 -->
+        <div class="pic-group">
+
+            <div class="pic">
+                <img src="img/landscape.jpg" alt="">
+            </div>
+
+            <div class="btn">
+                <img src="img/Play.png" alt="">
+            </div>
+
+            <div class="gray"></div>
+
+        </div>
+
+        <div class="main-txt"></div>
+
+
+        <!-- 主區三 -->
+        <div class="main-txt">
+            <div class="sg">
+                <!-- ::before -->
+                <span>因為我們做了這些革新</span>
+                <div class="line"></div>
+            </div>
+
+            <h3>低重心設計</h3>
+            <p>透過低重心設計，不僅呈現更低伏的外觀，更能減少車身側傾，保持高速行駛穩定性。</p>
+
+            <h3>車體剛性強化</h3>
+            <p>車身結構採用超高強度鋼材，提高車輛穩定性，同時藉由雷射強化焊接技術，大幅增加焊點數量，提升車身抗扭剛性，強化駕馭穩定性及安全性。</p>
+
+            <h3>四輪獨立懸吊</h3>
+            <p>搭載全新四輪獨立懸吊設定，透過懸吊的高承載強度，保持輪胎抓地力，同時兼顧轉向靈敏度與清晰路感回饋，提升駕馭樂趣。</p>
+
+        </div>
+
+    </section>
+
+    <!-- 02 -->
+    <section class="section">
+
+        <!-- 主區一 -->
+        <div class="title-group">
+            <h2 class="title">
+                <span class="title-txt">安全守護</span>
+                <span class="number">02</span>
+            </h2>
+
+            <div class="title-sg">
+                <h3>行車更安心的高剛性車體</h3>
+                <p>您的愛車會妥善保護您，強悍穩固的車身可以使您安全無虞。世界級的安全功能讓您輕鬆自如享受旅程、毫無後顧之憂。</p>
+            </div>
+        </div>
+
+        <!-- 主區二 -->
+        <div class="pic-group">
+
+            <div class="pic">
+                <img src="img/landscape.jpg" alt="">
+            </div>
+
+            <div class="btn">
+                <img src="img/Play.png" alt="">
+            </div>
+
+            <div class="gray"></div>
+
+        </div>
+
+        <div class="main-txt"></div>
+
+
+        <!-- 主區三 -->
+        <div class="main-txt">
+            <div class="sg">
+                <!-- ::before -->
+                <span>因為我們做了這些革新</span>
+                <div class="line"></div>
+            </div>
+
+            <h3>主動安全</h3>
+            <p>以先進的 TSS 系統，主動偵測路況，輔助駕駛判斷路況並維持行車安全。</p>
+
+            <h3>被動安全</h3>
+            <p>堅固的高剛性車體，使用熱沖壓材料的高強度抗扭鋼板，強化座艙對意外事故的保護力。</p>
+
+        </div>
+
+    </section>
+
+    <!-- 03 -->
+    <section class="section">
+
+        <!-- 主區一 -->
+        <div class="title-group">
+            <h2 class="title">
+                <span class="number">03</span>
+                <span class="title-txt">乘坐舒適</span>
+            </h2>
+
+            <div class="title-sg">
+                <h3>令人放鬆舒適的車室空間</h3>
+                <p>車室空間設計著重人體工學，透過方向盤、踏板等位置優化，追求更舒適的駕駛位置，並以新型座椅設計，提高座椅包覆性，致力實現長途駕駛不疲勞的舒適駕馭體驗。</p>
+            </div>
+        </div>
+
+        <!-- 主區二 -->
+        <div class="pic-group">
+
+            <div class="pic">
+                <img src="img/landscape.jpg" alt="">
+            </div>
+
+            <div class="btn">
+                <img src="img/Play.png" alt="">
+            </div>
+
+            <div class="gray"></div>
+
+        </div>
+
+        <div class="main-txt"></div>
+
+
+        <!-- 主區三 -->
+        <div class="main-txt">
+            <div class="sg">
+                <!-- ::before -->
+                <span>因為我們做了這些革新</span>
+                <div class="line"></div>
+            </div>
+
+            <h3>駕駛位置最佳化</h3>
+            <p>針對駕駛位置進行徹底的修改，讓駕馭者可以如同握手般自然且舒適地操縱方向盤。</p>
+
+            <h3>駕馭視野佳</h3>
+            <p>考量駕駛坐進車內的高度，透過前擋風玻璃位置的調整，達到盲區極小化，使駕駛視野更開闊，同步提升駕馭安全。</p>
+
+            <h3>更寧靜的車室</h3>
+            <p>採用最新三層結構的隔音材料，與引擎、變速箱的零件改革，將座艙的震動抑制在最小限度，提供乘客舒適安靜的感受。</p>
+
+        </div>
+
+    </section>
+
+    <!-- 04 -->
+    <section class="section">
+
+        <!-- 主區一 -->
+        <div class="title-group">
+            <h2 class="title">
+                <span class="title-txt">以人為本</span>
+                <span class="number">04</span>
+            </h2>
+
+            <div class="title-sg">
+                <h3>使用者導向的貼心設計</h3>
+                <p>藉由高度人性化的介面整合、傳遞車輛資訊，豐富日常駕駛體驗。從提升油耗表現到行李廂空間最適化，均細心考量，更加貼近使用者真正所需與習慣，並給予即時回應。</p>
+            </div>
+        </div>
+
+        <!-- 主區二 -->
+        <div class="pic-group">
+
+            <div class="pic">
+                <img src="img/landscape.jpg" alt="">
+            </div>
+
+            <div class="btn">
+                <img src="img/Play.png" alt="">
+            </div>
+
+            <div class="gray"></div>
+
+        </div>
+
+        <div class="main-txt"></div>
+
+
+        <!-- 主區三 -->
+        <div class="main-txt">
+            <div class="sg">
+                <!-- ::before -->
+                <span>因為我們做了這些革新</span>
+                <div class="line"></div>
+            </div>
+
+            <h3>優異油耗表現</h3>
+            <p>以 AURIS 為例，更強勁的高效引擎將熱效率提升至40%，達到世界級水準，屢屢突破燃油效率新境界。</p>
+
+            <h3>行李箱空間最適化</h3>
+            <p>以 PRIUS 為例，透過將電池位置移到後座下方，譲行李廂擁有更大的空間。</p>
+
+        </div>
+
+    </section>
+
+    <!-- 05 -->
+    <section class="section">
+
+        <!-- 主區一 -->
+        <div class="title-group">
+            <h2 class="title">
+                <span class="number">05</span>
+                <span class="title-txt">引以為傲</span>
+            </h2>
+
+            <div class="title-sg">
+                <h3>極具吸引力的精心設計</h3>
+                <p>TNGA車款擁有讓人忍不住回頭的新潮外觀、讓駕駛充滿自信的駕馭快感!不僅讓車主能展現個人風格，也能讓擁有者都能引以為傲。</p>
+            </div>
+        </div>
+
+        <!-- 主區二 -->
+        <div class="pic-group">
+
+            <div class="pic">
+                <img src="img/landscape.jpg" alt="">
+            </div>
+
+            <div class="btn">
+                <img src="img/Play.png" alt="">
+            </div>
+
+            <div class="gray"></div>
+
+        </div>
+
+        <div class="main-txt"></div>
+
+
+        <!-- 主區三 -->
+        <div class="main-txt">
+            <div class="sg">
+                <!-- ::before -->
+                <span>因為我們做了這些革新</span>
+                <div class="line"></div>
+            </div>
+
+            <h3>設計概念</h3>
+            <p>TNGA低重心設計，不僅呈現更低伏的運動化外觀，更講究高品質內装的一致性。</p>
+
+            <h3>環保概念</h3>
+            <p>為了對環境保護盡一份心力，我們全面提升傳統引擎、變速箱與油電複合動力的動力效能。</p>
+
+        </div>
+
+    </section>
+
+
+
+</body>
+
+</html>
