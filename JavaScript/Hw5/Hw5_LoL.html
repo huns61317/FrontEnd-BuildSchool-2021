@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hw5_LoL</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <style>
+        .card {
+            border: 1px solid black;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .headshot {
+            overflow: hidden;
+        }
+
+        .card-title {
+            color: white;
+            background-color: black;
+            display: inline-block;
+            border-radius: 5px;
+            padding: 5px 15px 5px 15px;
+        }
+
+        .card-body {
+            background-color: #ffbf67;
+        }
+
+        /* Card 樣板文字說明 */
+        .card-text {
+            overflow: hidden;  /* 溢出 => 隱藏 */
+            text-overflow: ellipsis;  /* 文字溢出 => ellipsis(用 ... 省略來表示) */
+            display: -webkit-box;  /* 展示 => -webkit-box(僅限chrome/safari瀏覽器有效)，當作盒子來使用 */
+            -webkit-line-clamp: 4;  /* 限定行數 => 4行 */
+            -webkit-box-orient: vertical;  /* => 垂直 */
+        }
+
+        .card:hover {
+            box-shadow: 8px 8px 15px #808080;
+            transform: translate(5px, 5px);
+        }
+
+        .card:hover img {
+            transform: scale(1.2);
+            transition: transform 0.5s;
+        }
+
+        .card:not(:hover) img {
+            transform: scale(1, 1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover .card-body {
+            background-color: lightgreen !important;
+        }
+
+        .card:hover .card-title {
+            color: black;
+            background-color: white !important;
+        }
+
+        .modal-header {
+            background-color: CornflowerBlue;
+        }
+
+        /* 圖片 */
+        #pizzaImage {
+            width: 100%;
+        }
+
+        /* 文字(說明) */
+        #description {
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='container-fluid'>
+        <div class='jumbotron bg-info'>
+            <h1>LoL Card Template</h1>
+        </div>
+
+        <div class='row'>
+
+        </div>
+    </div>
+
+    <!-- step2: 建立 Card TempLate 樣板 -->
+    <template id='cardLoL'>
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+
+            <div class="card-body">
+                <h5 class="card-title"></h5>
+                <p class="card-text"></p>
+                <a href="#" class="btn btn-primary" id="btn-description">詳細</a>
+                <a href="#" class="btn btn-danger" id="btn-video">影片</a>
+            </div>
+
+        </div>
+    </template>
+
+    <!-- 點擊按鈕後，出現視窗的樣式 -->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <img id="pizzaImage">
+                    <h1 id="description" class="text-primary"></h1>
+                    <div id="video"></div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+
+    <script type='module'>
+
+        // 匯入模組($g => 選到)
+        import { $g } from '../modules/helpers.js';
+
+        // Pseudo code 虛擬碼
+        // 1.準備好 Pizza 資料陣列
+        // 2.建立 Card TempLate 樣板
+        // 3.複製 Card 樣板，並設定資料
+        // 4.將複製的 Card 加入 DOM 中
+
+        let row = $g(".row");
+        window.onload = function () {
+            requestJSON();
+        };
+
+        // step1: 準備好 LoL 資料(物件)
+        const url = "https://raw.githubusercontent.com/huns61317/JSON/main/JSON_LoL.json";  // LoL 資料的網址
+        let LoLObject = {};
+        let xhr = new XMLHttpRequest();
+
+        function requestJSON() {
+            xhr.onload = function () {  // 匿名
+                LoLObject = JSON.parse(this.responseText);  // 回傳資料
+                // console.log(LoLObject);
+                // console.log(LoLObject.data);
+
+                let LoLDatas = Object.values(LoLObject.data);
+                // console.log(LoLDatas);
+
+                // 用 迭代 顯示每一筆資料
+                LoLDatas.forEach((LoLData, index) => {
+                    // console.log(LoLData);
+
+                    let card = $g("#cardLoL");  // 選到 card 樣板
+
+                    // step3: 複製 Card 樣板，並設定資料
+                    let cloneContent = card.content.cloneNode(true);  // 做 複製節點(卡片)
+
+                    cloneContent.querySelector("img").src = `https://cdngarenanow-a.akamaihd.net/games/lol/2020/LOLwebsite/champion/${LoLData.id}_0.jpg`;  // 設定 card 樣板的 圖片
+                    cloneContent.querySelector("h5").innerText = `${index}: ${LoLData.id} - ${LoLData.name}`;  // 設定 card 樣板的 文字
+                    cloneContent.querySelector("p").innerText = LoLData.blurb;  // 設定 card 樣板的 文字
+
+                    // 按 "詳細"
+                    cloneContent.querySelector("#btn-description").addEventListener("click", function () {
+                        this.setAttribute("data-toggle", "modal");  // 設定屬性(動態產生) data-toggle = "modal" 對應 class
+                        this.setAttribute("data-target", "#exampleModal");  // 設定屬性(動態產生) data-target = "#exampleModal" 對應 id
+
+                        // 按 "詳細" 按鈕後出現的視窗樣式
+                        let modal = $g("#exampleModal");
+                        modal.querySelector("h5").innerText = `${LoLData.id} - ${LoLData.name}`;  // 標題
+                        modal.querySelector("#pizzaImage").src = `https://cdngarenanow-a.akamaihd.net/games/lol/2020/LOLwebsite/champion/${LoLData.id}_0.jpg`;  // 圖片
+
+                        console.log(LoLData.stats);
+                        let heroKeys = Object.keys(LoLData.stats);  // 取 角色的屬性名稱
+                        console.log(heroKeys);
+                        heroKeys.forEach((key, index) => {
+                            console.log(key);
+                            modal.querySelector("#description").innerHTML += `${key}: ${LoLData.stats[key]}<br><br>`;  // 角色狀態
+                        });
+
+                        modal.querySelector("#video").innerHTML = "";  // 影片(清空)
+
+                    });
+
+                    // 按 "影片" 按鈕後出現的視窗樣式
+                    cloneContent.querySelector("#btn-video").addEventListener("click", function () {
+                        this.setAttribute("data-toggle", "modal");  // 設定屬性(動態產生) data-toggle = "modal" 對應 class
+                        this.setAttribute("data-target", "#exampleModal");  // 設定屬性(動態產生) data-target = "#exampleModal" 對應 id
+
+                        // 按 "影片" 按鈕後出現的視窗樣式
+                        let modal = $g("#exampleModal");
+                        modal.querySelector("h5").innerText = `${LoLData.id} - ${LoLData.name}`;  // 標題
+                        modal.querySelector("#pizzaImage").src = "";  // 圖片(清空)
+                        modal.querySelector("#description").innerHTML = "";  // 文字(清空)
+                        modal.querySelector("#video").innerHTML = `<iframe width="450" height="315" src="https://www.youtube.com/embed/wNNQRmx1qhM?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;  // 影片
+
+                    });
+
+                    // step4: 將複製的 Card 加入 DOM 中
+                    row.append(cloneContent);  // 把 複製並設定 好的東西，加到 row 裡面去
+                });
+            }
+
+            xhr.open("GET", url);  // 請求資料
+            xhr.send();  // 送出非同步請求
+        }
+
+    </script>
+</body>
+
+</html>
